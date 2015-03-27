@@ -1,3 +1,0 @@
-Values/Strings.xml;values/strings.xml
-Layout/app_msg.xml;layout/app_msg.xml
-Values/colors.xml;values/colors.xml

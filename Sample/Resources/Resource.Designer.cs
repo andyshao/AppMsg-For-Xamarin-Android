@@ -88,7 +88,19 @@ namespace Sample
 		{
 			
 			// aapt resource value: 0x7f060000
-			public const int MyButton = 2131099648;
+			public const int btnAlert = 2131099648;
+			
+			// aapt resource value: 0x7f060004
+			public const int btnClose = 2131099652;
+			
+			// aapt resource value: 0x7f060002
+			public const int btnConfirm = 2131099650;
+			
+			// aapt resource value: 0x7f060001
+			public const int btnInfo = 2131099649;
+			
+			// aapt resource value: 0x7f060003
+			public const int btnOpen = 2131099651;
 			
 			static Id()
 			{

@@ -5,37 +5,51 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using AppMsg;
+using AMsg = AppMsg.AppMsg;
 
 namespace Sample
 {
-    [Activity(Label = "Sample", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "AppMsg示例", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
         AppMsg.AppMsg appmsg;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
+            FindViewById<Button>(Resource.Id.btnAlert).Click += (e, s) =>
+            {
+                AMsg.MakeText(this, "Alert 测试", AMsg.STYLE_ALERT).Show();
+            };
 
-            button.Click += delegate { 
-                button.Text = string.Format("{0} clicks!", count++);
+            FindViewById<Button>(Resource.Id.btnConfirm).Click += (e, s) =>
+            {
+                AMsg.MakeText(this, "Confirm 测试", AMsg.STYLE_CONFIRM).Show();
+            };
+
+            FindViewById<Button>(Resource.Id.btnInfo).Click += (e, s) =>
+            {
+                AMsg.MakeText(this, "Info 测试", AMsg.STYLE_INFO).Show();
+            };
+
+            FindViewById<Button>(Resource.Id.btnOpen).Click += (e, s) =>
+            {
+                if (appmsg == null)
+                {
+                    appmsg = AMsg.MakeText(this, "不会自动关闭的提示", new AppMsg.Style(AMsg.LENGTH_STICKY, Resource.Color.info));
+                }
+                if (!appmsg.IsShowing)
+                {
+                    appmsg.Show();
+                }
+            };
+
+            FindViewById<Button>(Resource.Id.btnClose).Click += (e, s) =>
+            {
                 if (appmsg != null)
                 {
                     appmsg.Dismiss();
-                }
-                if (appmsg == null)
-                {
-                    appmsg = AppMsg.AppMsg.MakeText(this, "测试", new Style(AppMsg.AppMsg.LENGTH_STICKY, Resource.Color.alert));
-                    appmsg.Show();
                 }
             };
         }
